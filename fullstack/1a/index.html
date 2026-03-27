@@ -11,7 +11,7 @@
         Email: <input id="e"><br><br>
         Password: <input type="password" id="p"><br><br>
         Confirm Password: <input type="password" id="cp"><br><br>
-        Mobile: <input id="m"><br><br>
+        Mobile: <input type="tel" id="m"><br><br>
 
         Gender:
         <input type="radio" name="g">Male
@@ -33,15 +33,13 @@
             let c = document.getElementById("c").checked;
 
             if (!n || !e || !p || !cp || !m) return alert("All fields required"), false;
-            if (!n || !e || !p) return alert("Fill all"), false;
-
             if (!isNaN(n)) return alert("Name only letters"), false;
 
-            if (!e.includes("@") || !e.includes(".")) return alert("Invalid email"), false;
+            if (!e.includes("@") || !e.includes(".com")) return alert("Invalid email"), false;
 
             if (p.length < 6) return alert("Password too short"), false;
             if (p !== cp) return alert("Passwords not match"), false;
-            if (!/^\d{10}$/.test(m)) return alert("Invalid mobile"), false;
+            if (m.length !== 10) return alert("Invalid mobile"), false;
 
             if (!g[0].checked && !g[1].checked) return alert("Select gender"), false;
 
@@ -54,3 +52,123 @@
 </body>
 
 </html>
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Startup Website</title>
+
+<style>
+body {margin:0; text-align:center;}
+nav {background:#333; padding:10px;}
+nav a {color:white; margin:10px;}
+section {padding:40px;height:700px}
+#home {background:lightblue;}
+#services {background:lightgreen;}
+#contact {background:lightgray;}
+button {padding:10px;}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="home">
+  <h2>Welcome to Our Startup</h2>
+  <p>We provide simple and smart solutions.</p>
+  <button onclick="msg()">Click Me</button>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <p>Web Development | App Development | Data Analysis</p>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: startup@gmail.com</p>
+</section>
+
+<script>
+function msg(){
+  alert("Welcome to our startup!");
+}
+</script>
+
+</body>
+</html>
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <input type="text" onkeydown="down()" onkeyup="up()">
+    <p id="msg"></p>
+    <button onclick="SingleClick()">Click
+        <button ondblclick="doubleClick()">ClickButton</button>
+        <div onmouseover="mouseOver()" style="width:200px;height:50px;background:lightblue;margin-top:20px;">
+            Mouse Over Here
+        </div>
+        <script>
+            function down() {
+                document.getElementById("msg").innerHTML = "Key Down Event";
+            }
+            function up() {
+                document.getElementById("msg").innerHTML = "Key Up Event";
+            }
+            function singleClick() {
+                alert("Single Click");
+            }
+            function doubleClick() {
+                alert("Double Click");
+            }
+            function mouseOver() {
+                alert("Mouse Over Event");
+            }
+        </script>
+</body>
+
+</html>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        
+        <button onclick="mathf()">math</button>
+        <p id="math"></p>
+        <button onclick="datef()">date</button>
+        <p id="date"></p>
+        <script>
+            function mathf()
+            {
+            document.getElementById("math").innerText="ceil : "+Math.ceil(2.3434)+
+            "\nfloor: "+Math.floor(234.456)+"\nround : "+Math.round(23.455)+"\npow : "+Math.pow(2,3)}
+            function datef(){
+                d=new Date()
+                document.getElementById("date").innerText="date is "+d.getDate()+"\nmonth "+(d.getMonth()+1)+"\nyear "+d.getFullYear()+"\nhours "+d.getHours()+"\nminutes "+d.getMinutes()+"\nsecond "+d.getSeconds()
+            }
+        </script>
+    </body>
+</html>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
