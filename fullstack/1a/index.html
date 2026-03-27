@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h3>Simple Validation Form</h3>
+
+    <form onsubmit="return v()">
+
+        Name: <input id="n"><br><br>
+        Email: <input id="e"><br><br>
+        Password: <input type="password" id="p"><br><br>
+        Confirm Password: <input type="password" id="cp"><br><br>
+        Mobile: <input id="m"><br><br>
+
+        Gender:
+        <input type="radio" name="g">Male
+        <input type="radio" name="g">Female<br><br>
+
+        <input type="checkbox" id="c"> Accept Terms<br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function v() {
+            let n = document.getElementById("n").value;
+            let e = document.getElementById("e").value;
+            let p = document.getElementById("p").value;
+            let cp = document.getElementById("cp").value;
+            let m = document.getElementById("m").value;
+            let g = document.getElementsByName("g");
+            let c = document.getElementById("c").checked;
+
+            if (!n || !e || !p || !cp || !m) return alert("All fields required"), false;
+            if (!n || !e || !p) return alert("Fill all"), false;
+
+            if (!isNaN(n)) return alert("Name only letters"), false;
+
+            if (!e.includes("@") || !e.includes(".")) return alert("Invalid email"), false;
+
+            if (p.length < 6) return alert("Password too short"), false;
+            if (p !== cp) return alert("Passwords not match"), false;
+            if (!/^\d{10}$/.test(m)) return alert("Invalid mobile"), false;
+
+            if (!g[0].checked && !g[1].checked) return alert("Select gender"), false;
+
+            if (!c) return alert("Accept terms"), false;
+
+            alert("Form submitted");
+        }
+    </script>
+
+</body>
+
+</html>
