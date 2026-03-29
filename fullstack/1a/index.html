@@ -171,4 +171,404 @@ function msg(){
 
 
 
+10b
+function add(a,b,callback){
+    result=a+b
+    callback(result)
+}
+add(2,4,result=>{
+    console.log(result)
+})
+
+
+14a
+import React from "react";
+function App(){
+ return(
+ <div>
+ <h1>Student Details</h1>
+ <p>Name: Kiran</p>
+ <p>Course: BSc</p>
+ </div>
+ );
+}
+export default App;
+
+
+15b
+import React from "react"
+
+function App(){
+  return(
+    <div>
+      <h1>subjects</h1>
+      <ul>
+        <li>maths</li>
+        <li>maths</li>
+        <li>maths</li>
+      </ul>
+    </div>
+  )
+}
+export default App;
+
+
+16a
+show dbs
+admin       80.00 KiB
+config     108.00 KiB
+local       64.00 KiB
+sam         48.00 KiB
+serverDB    40.00 KiB
+student     72.00 KiB
+studentDB   40.00 KiB
+students    40.00 KiB
+test        40.00 KiB
+testdb     200.00 KiB
+use testdb11
+switched to db testdb11
+db.createCollection("student1")
+{ ok: 1 }
+db.student1.insert({name:"pragdeesh",age:21})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c9186b6e4f9e488d4f7912')
+  }
+}
+db.student1.insertOne({name:"pragdeesh",age:21})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69c918776e4f9e488d4f7913')
+}
+db.student1.find()
+{
+  _id: ObjectId('69c9186b6e4f9e488d4f7912'),
+  name: 'pragdeesh',
+  age: 21
+}
+{
+  _id: ObjectId('69c918776e4f9e488d4f7913'),
+  name: 'pragdeesh',
+  age: 21
+}
+db.student1.updateOne({name:"pragdeesh",age:21},{name:"prakash",age:23})
+MongoInvalidArgumentError: Update document requires atomic operators
+db.student1.updateOne({name:"pragdeesh",age:21},{$set{name:"prakash",age:23}})
+SyntaxError: Unexpected token, expected "," (1:53)
+
+> 1 | db.student1.updateOne({name:"pragdeesh",age:21},{$set{name:"prakash",age:23}})
+    |                                                      ^
+db.student1.updateOne({name:"pragdeesh",age:21},{$set:{name:"prakash",age:23}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.student1.find()
+{
+  _id: ObjectId('69c9186b6e4f9e488d4f7912'),
+  name: 'prakash',
+  age: 23
+}
+{
+  _id: ObjectId('69c918776e4f9e488d4f7913'),
+  name: 'pragdeesh',
+  age: 21
+}
+db.student1.deleteOne({name:"pragdeesh"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.student1.find()
+{
+  _id: ObjectId('69c9186b6e4f9e488d4f7912'),
+  name: 'prakash',
+  age: 23
+}
+db.student1.drop()
+true
+db.student1.drop()
+true
+db.student1.find()
+
+
+
+17a,16a,15a,14a,13a,12a,11a
+const mongoose=require("mongoose")
+
+mongoose.connect("mongodb://localhost:27017/testdb")
+.then(()=>{
+    console.log("connected")
+})
+.catch((err)=>{
+    console.log("error happended")
+})
+
+const student=mongoose.model("student121212",{name:String,age:Number})
+
+async function runCRUD(){
+    await student.create({name:"pragdessh",age:21})
+    console.log("created")
+
+    let data=await student.find()
+    console.log("data:",data)
+
+    await student.updateOne({name:"pragdessh",age:21},{name:"prakash",age:32})
+    console.log("update")
+
+    await student.deleteOne({name:"prakash",age:32})
+    console.log("delete")
+}
+
+runCRUD();
+
+
+
+
+17b
+const mongoose=require("mongoose")
+
+mongoose.connect("mongodb://localhost:27017/")
+.then(()=>{
+    console.log("connected successfully")
+})
+.catch((err)=>{
+    console.log("error cant connect",err)
+})
+
+18a
+<!doctype html>
+<html>
+
+<body>
+    <form onsubmit="return v()">
+        name<input id="n"><br><br>
+        email<input id="e"><br><br>
+        password<input type="password" id="p"><br><br>
+        confirm password<input type="password" id="cp"><br><br>
+        mobile<input id="m"><br><br>
+        gender:
+        <input type="radio" name="g">male
+        <input type="radio" name="g">female<br><br>
+        <input type="checkbox" id="c">accept terms
+        <br><br>
+        <input type="submit">
+    </form>
+    <script>
+        function v() {
+            let n = document.getElementById("n").value
+            let e = document.getElementById("e").value
+            let p = document.getElementById("p").value
+            let cp = document.getElementById("cp").value
+            let m = document.getElementById("m").value
+            let g = document.getElementsByName("g")
+            let c = document.getElementById("c").checked
+
+            if (!n || !e || !p || !cp || !m || !c) return alert("fill all fields"), false
+            if (!isNaN(n)) return alert("fill name properly"), false
+            if (!e.includes("@") || !e.includes(".com")) return alert("fill with @ and .com"), false
+            if (p.length < 6) return alert("more than 6 chr"), false
+            if (p != cp) return alert("password mismatch"), false
+            if (m.length != 10) return alert("10 digits"), false
+            if (!g[0].checked && !g[1].checked) return alert("select gender"), false
+            if (!c) return alert("accept the terms")
+
+            alert("form filled")
+        }
+    </script>
+</body>
+
+</html>
+
+
+18b
+<html>
+
+<body>
+    <button onclick="date1()">date</button>
+    <p id="date1"></p>
+    <button onclick="math1()">date</button>
+    <p id="math1"></p>
+
+    <script>
+        function date1() {
+            d = new Date()
+            document.getElementById("date1").innerText = "the d is" + d +
+                "\nthe d is" + d.getFullYear() +
+                "\nthe d is" + (d.getMonth() + 1) +
+                "\nthe d is" + d.getDate() +
+                "\nthe d is" + d.getHours() +
+                "\nthe d is" + d.getMinutes() +
+                "\nthe d is" + d.getSeconds()
+        }
+        function math1() {
+            document.getElementById("math1").innerText = "the ceil is" + Math.ceil(23.3333) +
+                "\nthe ceil is" + Math.floor(23.456) +
+                "\nthe ceil is" + Math.pow(2, 3) +
+                "\nthe ceil is" + Math.abs(-12) +
+                "\nthe ceil is" + Math.max(1, 2, 3, 4, 5, 5, 65)
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+
+19a
+<html>
+
+<body>
+    <input type="tet" onkeyup="onkeyup1()" onkeydown="onkeydown1()" id="main">
+    <p id="text1"></p>
+    <button onclick="single()">single</button>
+    <button ondblclick="double()">double</button>
+    <div style="height:60px;width:100px;background:green" onmouseover="mouse()">
+
+    </div>
+    <div style="height:60px;width:100px;background:green" onmouseenter="mouse1()">
+
+    </div>
+    <script>
+        function onkeyup1() {
+            document.getElementById("text1").innerText = "keu up"
+        }
+        function onkeydown1() {
+            document.getElementById("text1").innerText = "keu down"
+        }
+        function single() {
+            alert("single")
+        }
+        function double() {
+            alert("double")
+        }
+        function mouse() {
+            alert("mouse")
+        }
+        function mouse1() {
+            alert("mouse1")
+        }
+    </script>
+</body>
+
+</html>
+
+
+19b,12b
+const express=require("express")
+const app=express()
+
+const student=[
+    {name:"pragdessh",
+    age:2123423432}
+]
+
+app.get("/student",(req,res)=>{
+    res.send(student)
+})
+
+app.listen(3000,()=>{
+    console.log("port 3000")
+})
+
+20a
+import React ,{useState} from "react"
+
+function App(){
+const [exp,setexp]=useState("")
+
+return(
+  <div >
+     <input value={exp} />
+
+     <button style={{padding:"20px"}} onClick={()=>setexp(exp+"1")}>1</button>
+     <button onClick={()=>setexp(exp+"2")}>2</button>
+     <button onClick={()=>setexp(exp+"3")}>3</button>
+     <button onClick={()=>setexp(exp+"4")}>4</button>
+     <button onClick={()=>setexp(exp+"5")}>5</button>
+     <button onClick={()=>setexp(exp+"6")}>6</button>
+     <button onClick={()=>setexp(exp+"7")}>7</button>
+     <button onClick={()=>setexp(exp+"8")}>8</button>
+     <button onClick={()=>setexp(exp+"9")}>9</button>
+     <button onClick={()=>setexp(exp+"0")}>0</button>
+     <button onClick={()=>setexp(exp+"+")}>+</button>
+     <button onClick={()=>setexp(exp+"-")}>-</button>
+     <button onClick={()=>setexp(exp+"*")}>*</button>
+     <button onClick={()=>setexp(exp+"/")}>/</button>
+     <button onClick={()=>setexp("")}>c</button>
+     <button onClick={()=>setexp(eval(exp))}>=</button>
+
+  </div>
+)}
+export default App;
+
+
+20b
+i=0
+
+let id=setInterval(()=>{
+    console.log("hello",i)
+    i+=1
+    if(i==5){
+        clearInterval(id)
+    }
+},2000)
+Todo list
+
+import React, { useState } from "react";
+
+function App() {
+  const [input, setInput] = useState("");
+  const [items, setItems] = useState([]);
+
+  // Add Task
+  const addTask = () => {
+    if (input === "") return;
+
+    setItems([...items, input]);
+    setInput("");
+  };
+
+  // Delete Task
+  const deleteTask = (index) => {
+    const updated = items.filter((_, i) => i !== index);
+    setItems(updated);
+  };
+
+  return (
+    <div className="container">
+      <h2>Todo App</h2>
+
+      <input
+        type="text"
+        placeholder="Enter task"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+
+      <button onClick={addTask}>Add</button>
+
+      <div>
+        {items.map((item, index) => (
+          <p key={index}>
+            {item}
+            <button onClick={() => deleteTask(index)}>Delete</button>
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------
